@@ -1,0 +1,42 @@
+https://guides.github.com/introduction/git-handbook/
+https://www.youtube.com/watch?v=iv8rSLsi1xo
+https://training.github.com/downloads/github-git-cheat-sheet/
+
+Here are the steps of this workflow for a new Git repository when you have a new project:
+1.	Initialize git repo in a folder: git init
+2.	Create your branch: git checkout -b <new_branch_name>
+3.	Create src folder, script folder, README.md and .gitignore file
+4.	Write code and test your functionality. 
+5.	On command line, type: git status.
+6.	Make sure only files you created are there and nothing else in the output of git status
+7.	Type git add –all.
+It is better to “git add” individual files separately as sometimes something by mistake can add to your folder that you may have accidentally copied in the folder. Use Git GUIs for your support which makes it easier without memorization of commands.
+8.	Type git commit -m “write a descriptive message about the changes”
+9.	Type git push origin <new_branch_name>
+10.	Go to Git lab and ask maintainer to create preview and validation branches. 
+11.	Submit a new merge request to preview branch on GitLab.
+12.	Code review will take place now.
+13.	When code is merged after successful code review, it will be deployed to preview cluster.
+14.	In a similar manner, it will be merged on validation branch and master branch,  and deployed on the respective clusters.  Note that no code should be merged directly from custom branches to validation or production branch. 
+
+Here are the steps of workflow for an existing project for which you need to add new functionality (new developers often forget the following order of steps and run into errors later with  Git):
+1.	Checkout the preview branch: git checkout preview
+2.	Pull the latest code: git pull origin preview
+3.	Create a new branch: git checkout -b <new_branch_name>
+4.	Write your code and test it.
+5.	Add source code files to git; git add –all
+6.	Commit them: git commit -m “some descriptive message”
+a.	Note that if at this time another developer has merged new code to preview branch then you need to checkout preview branch and pull code again (i.e., repeat steps 1 and 2. After that type:  
+i.	git checkout <new_branch_name> 
+ii.	git merge preview
+7.	Push code to the remote server: git push origin <new_branch_name>
+8.	Now go to Gitlab and create a merge request for preview branch
+
+
+Finally, here are key points to remember:
+1.	Create one Git repo per project
+2.	Work from your own branch.
+3.	Merge code into preview.
+4.	Only code from preview will be merged to validation, and only code from validation will be merged into master branch.
+5.	If CI/CD is enabled code will automatically be deployed to appropriate service account on a merge to three branches: preview, validation and master.
+
